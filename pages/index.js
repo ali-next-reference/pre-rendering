@@ -17,6 +17,7 @@ function HomePage(props) {
   );
 }
 
+// get static props tells the next js server to pre render the page at build time
 export async function getStaticProps(context) {
   console.log('(Re-)Generating...');
   const filePath = path.join(process.cwd(), 'data', 'dummy-backend.json');
@@ -39,6 +40,10 @@ export async function getStaticProps(context) {
     props: {
       products: data.products,
     },
+    // revalidate adds a Incremental Static Regeeration.
+    // This means that next js can pre generate new pages (or update existing ones) when there there is a change to data.
+    // revalidate: 10 means that the next server updates the pages at most every 10 seconds
+    // having the revalidate value
     revalidate: 10,
   };
 }

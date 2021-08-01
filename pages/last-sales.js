@@ -1,5 +1,9 @@
 import { useEffect, useState } from 'react';
+// useSWR is a sweet hook to use that helps a lot with client side data fetching
+// it's worth using in future projects
 import useSWR from 'swr';
+
+// this page shows what a mix of static prerendering and client side data fetching looks like
 
 function LastSalesPage(props) {
   const [sales, setSales] = useState(props.sales);
@@ -24,26 +28,6 @@ function LastSalesPage(props) {
       setSales(transformedSales);
     }
   }, [data]);
-
-  // useEffect(() => {
-  //   setIsLoading(true);
-  //   fetch('https://nextjs-course-c81cc-default-rtdb.firebaseio.com/sales.json')
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       const transformedSales = [];
-
-  //       for (const key in data) {
-  //         transformedSales.push({
-  //           id: key,
-  //           username: data[key].username,
-  //           volume: data[key].volume,
-  //         });
-  //       }
-
-  //       setSales(transformedSales);
-  //       setIsLoading(false);
-  //     });
-  // }, []);
 
   if (error) {
     return <p>Failed to load.</p>;
